@@ -27,5 +27,5 @@ jobs:
         ./demo/ssmanager.sh ${{ secrets.URL }} ${{ secrets.SERVICE }} ${{ secrets.KEY }}
     - name: Run tests
       run: |
-        cd ssmanager
+        cd demo
         ./manage.py test
