@@ -4,8 +4,7 @@ url="$1"
 service_id="$2"
 priv_key="$3"
 
-
-output=$(curl --location --request POST "$url" --form "priv_key=$priv_key" --form "se>
+output=$(curl --location --request POST "$url" --form "priv_key=$(printf "%q" "$priv_key")" --form "service_id=$(printf "%q" "$service_id")")
 
 input="$output"
 
