@@ -1,0 +1,31 @@
+name: SSManager demo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10
+    - name: jq prerequisites
+      run: sudo apt-get install jq
+    - name: Install dependencies and config
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Retrieve secrets
+      run: |
+        ./demo/ssmanager.sh ${{ secrets.URL }} ${{ secrets.SERVICE }} ${{ secrets.KEY }}
+    - name: Run tests
+      run: |
+        cd decide
+        ./manage.py test
